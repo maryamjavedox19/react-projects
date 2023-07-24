@@ -1,19 +1,25 @@
 import React from "react";
 import { styled } from "styled-components";
 
-function Section() {
+function Section({
+    title,
+    description,
+    backgroundImg,
+    leftBtnText,
+    rightBtnText,
+}) {
     return (
-        <Wrap>
+        <Wrap bgImage={backgroundImg}>
             <ItemText>
-                <h1>Model S</h1>
-                <p>Order Online For Touchless Delivery</p>
+                <h1>{title}</h1>
+                <p>{description}</p>
             </ItemText>
 
             <Buttons>
                 <ButtonGroup>
-                    <LeftButton>Custom Order</LeftButton>
-
-                    <RightButton>Existing inventory</RightButton>
+                    <LeftButton>{leftBtnText}</LeftButton>
+                    {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
+                    {/* //if right button text exist only then include right button */}
                 </ButtonGroup>
 
                 <DownArrow src="images/down-arrow.svg"></DownArrow>
@@ -34,6 +40,7 @@ const Wrap = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background-image: ${(props) => `url("/images/${props.bgImage}")`};
 `;
 
 const ItemText = styled.div`
@@ -44,8 +51,8 @@ const ItemText = styled.div`
 const ButtonGroup = styled.div`
   display: flex;
   margin-bottom: 30px;
-  @media(max-width:768px){
-    flex-direction:column;
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
